@@ -3,7 +3,7 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 
 const registerUser = async (req, res) => {
-  const { userName, email, password } = req.body;
+  const { userName, email, password, role } = req.body;
 
   try {
     const checkUSer = await User.findOne({ email });
@@ -20,6 +20,7 @@ const registerUser = async (req, res) => {
       userName,
       email,
       password: hashPassword,
+      role: role ? role : "user",
     });
 
     await newUser.save();
@@ -56,6 +57,13 @@ const loginUser = async (req, res) => {
       return res.status(404).json({
         success: false,
         message: "Invalid Email or Password",
+      });
+    }
+
+    if (user.role !== "admin" && user.role !== "user") {
+      return res.status(403).json({
+        success: false,
+        message: "User role is not valid",
       });
     }
 
