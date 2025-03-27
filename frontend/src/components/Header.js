@@ -18,7 +18,7 @@ const Header = () => {
       </ul>
       <div >
         <ul className='flex justify-around w-50 text-white'>
-        <li className='bg-blue-500 w-20 h-8 flex justify-around'>
+        <li className='bg-blue-500 w-20 h-8 flex justify-around '>
           <Link href="/auth/login">
             <button>Login</button>
           </Link>

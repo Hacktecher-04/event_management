@@ -11,8 +11,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        <EventProvider>
         <Header />
         {children}
+        </EventProvider>
       </body>
     </html>
   );
