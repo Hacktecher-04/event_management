@@ -13,15 +13,21 @@ export default function LoginPage() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        data,
-        { withCredentials: true }
-      );
+      const response = await axios.post('http://localhost:5000/api/auth/login', data, {
+        withCredentials: true,
+      });
 
       if (response.data.success) {
-        Cookies.set("token", response.data.token, { expires: 1 });
-        router.push("/");
+        // Save user token and role
+        Cookies.set("token", response.data.token, { expires: 1 }); 
+        Cookies.set("role", response.data.role, { expires: 1 });
+
+        // Redirect user based on role
+        if (response.data.role === "admin") {
+          router.push("/admin");
+        } else {
+          router.push("/dashboard");
+        }
       } else {
         setErrorMessage(response.data.message);
       }
@@ -58,17 +64,10 @@ export default function LoginPage() {
             />
           </div>
 
-          <button
-            type="submit"
-            className="w-full rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-          >
+          <button type="submit" className="w-full rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
             Login
           </button>
         </form>
-
-        <p className="mt-4 text-center text-sm text-gray-600">
-          Don't have an account? <a href="/auth/register" className="text-blue-500">Register</a>
-        </p>
       </div>
     </div>
   );

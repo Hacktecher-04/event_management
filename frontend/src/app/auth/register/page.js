@@ -78,18 +78,6 @@ export default function RegisterPage() {
             {errors.password && <p className="text-red-500 text-xs">{errors.password.message}</p>}
           </div>
 
-          {/* Role Selection */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Role</label>
-            <select
-              {...register("role")}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-indigo-300"
-            >
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
-            </select>
-          </div>
-
           {/* Submit Button */}
           <button
             type="submit"
