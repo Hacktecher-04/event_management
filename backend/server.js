@@ -5,6 +5,8 @@ const cors = require("cors");
 const connectDB = require("./config/db");
 
 const authRouter = require("./routes/authRoutes");
+const eventRouter = require("./routes/eventRoutes");
+const bookingRouter = require("./routes/bookingRoutes");
 
 dotenv.config();
 
@@ -34,4 +36,9 @@ connectDB();
 
 app.use("/api/auth", authRouter);
 
+app.use("/api/organiser/event",eventRouter);
+
+app.use("/api/attendees/booking", bookingRouter);
+
 app.listen(PORT, () => console.log(`Server running at PORT: ${PORT}`));
+ 
