@@ -1,5 +1,6 @@
 import "./globals.css";
-import Header from "@/components/Header"; 
+import Header from "@/components/Header";
+import { EventProvider } from "../context/EventContext";
 
 export const metadata = {
   title: "Create Next App",
@@ -10,8 +11,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Header />
-        {children}
+        <EventProvider>
+          <Header />
+          {children}
+        </EventProvider>
       </body>
     </html>
   );
